@@ -1,9 +1,16 @@
 let cnv = document.getElementById("canvas");
 let ctx = cnv.getContext("2d");
-cnv.width = 800;
-cnv.height = 600;
+cnv.width = 900;
+cnv.height = 700;
+
+ctx.fillStyle = "white";
+ctx.fillRect(850, 350, 15, 70);
 
 function drawStart() {
-  ctx.ctxfillStyle = "rgb(255,255,255";
-  ctx.fillRect(400, 0, 10, 30);
+  // Draw middle line
+  for (let y = 0; y <= 700; y += 40) {
+    ctx.fillStyle = "white";
+    ctx.fillRect(450, y, 10, 30);
+  }
 }
+drawStart();
