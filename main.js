@@ -4,22 +4,16 @@ cnv.width = 900;
 cnv.height = 700;
 
 let state = "start";
-function drawStart() {
-  // Draw plpayer rectangle(right)
-  ctx.fillStyle = "white";
-  ctx.fillRect(850, 350, 15, 120);
-  // Draw plpayer rectangle(left)
-  ctx.fillStyle = "white";
-  ctx.fillRect(50, 350, 15, 120);
-  // Draw Starting Text
-  ctx.font = "40px Consolas";
-  ctx.fillText("PRESS SPACE TO START", 205, 350);
-  // Draw middle line
-  for (let y = 0; y <= 700; y += 40) {
-    ctx.fillStyle = "white";
-    ctx.fillRect(450, y, 10, 30);
-  }
-}
+
+let ball = {
+  x: 400,
+  y: 370,
+  w: 20,
+  h: 20,
+  speed: 4,
+  accel: 0.1,
+};
+
 window.addEventListener("load", draw);
 
 function draw() {
@@ -34,6 +28,8 @@ function draw() {
 
 document.addEventListener("keydown", spaceKeyDown);
 
-function spaceKeyDown() {
-  state = "gameOn";
+function spaceKeyDown(event) {
+  if (event.code === "Space") {
+    state = "gameOn";
+  }
 }
