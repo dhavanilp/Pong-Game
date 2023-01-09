@@ -6,13 +6,15 @@ cnv.height = 700;
 let state = "start";
 
 let ball = {
-  x: 400,
+  x: 450,
   y: 370,
-  w: 20,
-  h: 20,
+  w: 15,
+  h: 15,
   speed: 4,
   accel: 0.1,
 };
+
+player2Y = 350;
 
 window.addEventListener("load", draw);
 
