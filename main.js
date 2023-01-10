@@ -14,7 +14,17 @@ let ball = {
   accel: 0.1,
 };
 
-player2Y = 350;
+let keySPressed = false;
+let keyWPressed = false;
+
+let player2Y = 350;
+let player1Y = 350;
+let player1X = 15;
+
+let playerRectHeight = 120;
+
+let playerRectWidth = 15;
+let player2X = 875;
 
 window.addEventListener("load", draw);
 
