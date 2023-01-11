@@ -19,6 +19,7 @@ function runGame() {
   } else if (keyWPressed) {
     player1Y -= 10;
   }
+  detectBallCollision();
 }
 
 function moveBall() {
@@ -73,11 +74,19 @@ function player1KeyUp(event) {
 
 function detectBallCollision() {
   if (
-    ball.x + ball.w > 875 &&
-    ball.x < 890 &&
-    ball.y + ball.h > player2Y &&
-    ball.y < player2Y + 120
+    ball.x < player2X + playerRectWidth &&
+    ball.x + ball.w > player2X &&
+    ball.y < player2Y + playerRectHeight &&
+    ball.y + ball.h > player2Y
   ) {
-    ball.x -= ball.speed;
+    ball.speed = -4;
+    console.log(ball.y);
+  } else if (
+    ball.x < player1X + playerRectWidth &&
+    ball.x + ball.w > player1X &&
+    ball.y < player1Y + playerRectHeight &&
+    ball.y + ball.h > player1Y
+  ) {
+    ball.speed = 4;
   }
 }
