@@ -11,13 +11,19 @@ function drawStart() {
 function runGame() {
   drawMainComponents();
   moveBall();
-  addEventListener("mousemove", movePLayer2Rect);
+  addEventListener("keyup", player2KeyUp);
+  addEventListener("keydown", player2KeyDown);
   addEventListener("keydown", player1KeyDown);
   addEventListener("keyup", player1KeyUp);
   if (keySPressed) {
     player1Y += 10;
   } else if (keyWPressed) {
     player1Y -= 10;
+  }
+  if (arrowDownKeyPressed) {
+    player2Y += 10;
+  } else if (arrowUpKeyPressed) {
+    player2Y -= 10;
   }
   detectBallCollision();
 }
@@ -50,10 +56,6 @@ function drawMainComponents() {
   }
 }
 
-function movePLayer2Rect(event) {
-  player2Y = event.y;
-}
-
 function player1KeyDown(event) {
   // KeyIsPressed Movement
 
@@ -64,11 +66,24 @@ function player1KeyDown(event) {
   }
 }
 function player1KeyUp(event) {
-  console.log(event);
   if (event.code === "KeyS") {
     keySPressed = false;
   } else if (event.code === "KeyW") {
     keyWPressed = false;
+  }
+}
+function player2KeyUp(event) {
+  if (event.code === "ArrowUp") {
+    arrowUpKeyPressed = false;
+  } else if (event.code === "ArrowDown") {
+    arrowDownKeyPressed = false;
+  }
+}
+function player2KeyDown(event) {
+  if (event.code === "ArrowUp") {
+    arrowUpKeyPressed = true;
+  } else if (event.code === "ArrowDown") {
+    arrowDownKeyPressed = true;
   }
 }
 
@@ -80,7 +95,6 @@ function detectBallCollision() {
     ball.y + ball.h > player2Y
   ) {
     ball.speed = -4;
-    console.log(ball.y);
   } else if (
     ball.x < player1X + playerRectWidth &&
     ball.x + ball.w > player1X &&
