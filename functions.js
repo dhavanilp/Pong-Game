@@ -11,6 +11,7 @@ function drawStart() {
 function runGame() {
   drawMainComponents();
   moveBall();
+  detectBallCollision();
   addEventListener("keyup", player2KeyUp);
   addEventListener("keydown", player2KeyDown);
   addEventListener("keydown", player1KeyDown);
@@ -25,7 +26,6 @@ function runGame() {
   } else if (arrowUpKeyPressed) {
     player2Y -= 10;
   }
-  detectBallCollision();
 }
 
 function moveBall() {
