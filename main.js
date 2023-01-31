@@ -10,7 +10,8 @@ let ball = {
   y: 370,
   w: 15,
   h: 15,
-  speed: 4,
+  Xspeed: 4,
+  Yspeed: 0,
   accel: 0.1,
 };
 

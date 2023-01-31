@@ -29,7 +29,7 @@ function runGame() {
 }
 
 function moveBall() {
-  ball.x += ball.speed;
+  ball.x += ball.Xspeed;
 
   drawMainComponents();
   // Draw Ball
@@ -94,13 +94,17 @@ function detectBallCollision() {
     ball.y < player2Y + playerRectHeight &&
     ball.y + ball.h > player2Y
   ) {
-    ball.speed = -4;
+    ball.Xspeed = -4;
+
   } else if (
     ball.x < player1X + playerRectWidth &&
     ball.x + ball.w > player1X &&
     ball.y < player1Y + playerRectHeight &&
     ball.y + ball.h > player1Y
   ) {
-    ball.speed = 4;
+    ball.Xspeed = 4;
+   
   }
+  
 }
+
