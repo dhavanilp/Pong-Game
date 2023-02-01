@@ -2,10 +2,14 @@ function drawStart() {
   drawMainComponents();
   // Draw Starting Text
   ctx.font = "40px Consolas";
-  ctx.fillText("PRESS SPACE TO START", 205, 100);
+  ctx.fillText("PRESS SPACE TO START", 205, 300);
   ctx.font = " 30px Consolas";
   ctx.fillText("PLAYER 1", 75, 375);
   ctx.fillText("PLAYER 2", 710, 375);
+
+  ctx.font = "50px Consolas";
+  ctx.fillText(`${player2Score}`, 650, 100);
+  ctx.fillText(`${player1Score}`, 250, 100);
 }
 
 function runGame() {
@@ -26,10 +30,14 @@ function runGame() {
   } else if (arrowUpKeyPressed) {
     player2Y -= 10;
   }
+  if (ball.x > cnv.width || ball.x < 0) {
+    pointAdded();
+  }
 }
 
 function moveBall() {
   ball.x += ball.Xspeed;
+  ball.y += ball.Yspeed;
 
   drawMainComponents();
   // Draw Ball
@@ -95,7 +103,6 @@ function detectBallCollision() {
     ball.y + ball.h > player2Y
   ) {
     ball.Xspeed = -4;
-
   } else if (
     ball.x < player1X + playerRectWidth &&
     ball.x + ball.w > player1X &&
@@ -103,8 +110,40 @@ function detectBallCollision() {
     ball.y + ball.h > player1Y
   ) {
     ball.Xspeed = 4;
-   
   }
-  
+
+  if (ball.y + ball.h > cnv.height || ball.y < 0) {
+    ball.Yspeed *= -1;
+  }
 }
 
+function pointAdded() {
+  if (ball.x > cnv.width) {
+    player1Score += 1;
+  } else if (ball.x + ball.w < 0) {
+    player2Score += 1;
+  }
+  if (player1Score >= 7 || player2Score >= 7) {
+    gameOver();
+  }
+}
+
+function gameOver() {
+  setTimeout(reset, 2000);
+}
+function reset() {
+  state = "start";
+
+  ball = {
+    x: 450,
+    y: 370,
+    w: 15,
+    h: 15,
+    Xspeed: 4,
+    Yspeed: Math.random() * 10,
+    accel: 0.1,
+  };
+
+  player1Score = 0;
+  player2Score = 0;
+}
