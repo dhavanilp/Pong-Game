@@ -33,6 +33,7 @@ function runGame() {
   if (player1Score === 7 || player2Score === 7) {
     gameOver();
   }
+
   if (player2Y < 0) {
     player2Y += 10;
   } else if (player2Y + playerRectHeight > cnv.height) {
@@ -44,6 +45,8 @@ function runGame() {
   } else if (player1Y + playerRectHeight > cnv.height) {
     player1Y -= 10;
   }
+  console.log(player1Score);
+  console.log(player2Score);
 }
 
 function moveBall() {
@@ -87,6 +90,7 @@ function player1KeyDown(event) {
     keyWPressed = true;
   }
 }
+
 function player1KeyUp(event) {
   if (event.code === "KeyS") {
     keySPressed = false;
@@ -94,6 +98,7 @@ function player1KeyUp(event) {
     keyWPressed = false;
   }
 }
+
 function player2KeyUp(event) {
   if (event.code === "ArrowUp") {
     arrowUpKeyPressed = false;
@@ -101,6 +106,7 @@ function player2KeyUp(event) {
     arrowDownKeyPressed = false;
   }
 }
+
 function player2KeyDown(event) {
   if (event.code === "ArrowUp") {
     arrowUpKeyPressed = true;
@@ -116,14 +122,14 @@ function detectBallCollision() {
     ball.y < player2Y + playerRectHeight &&
     ball.y + ball.h > player2Y
   ) {
-    ball.Xspeed = -6;
+    ball.Xspeed *= -1;
   } else if (
     ball.x < player1X + playerRectWidth &&
     ball.x + ball.w > player1X &&
     ball.y < player1Y + playerRectHeight &&
     ball.y + ball.h > player1Y
   ) {
-    ball.Xspeed = 6;
+    ball.Xspeed *= -1;
   }
 
   if (ball.y + ball.h > cnv.height || ball.y < 0) {
@@ -135,11 +141,11 @@ function pointAdded() {
   if (ball.x > cnv.width) {
     player1Score += 1;
     ball.x = 450;
-    ball.Xspeed = -6;
+    ball.Xspeed *= -1;
   } else if (ball.x + ball.w < 0) {
     player2Score += 1;
     ball.x = 450;
-    ball.Xspeed = 6;
+    ball.Xspeed *= -1;
   }
 }
 
@@ -148,6 +154,7 @@ function gameOver() {
   drawGameOver();
   setTimeout(reset, 3000);
 }
+
 function reset() {
   state = "start";
 
@@ -156,10 +163,10 @@ function reset() {
     y: 370,
     w: 15,
     h: 15,
-    Xspeed: 6,
-    Yspeed: Math.random() * 10,
-    accel: 0.1,
+    Xspeed: 8,
+    Yspeed: Math.floor(Math.random() * 10 + 1),
   };
+
   player2Y = 350;
   player1Y = 350;
 
